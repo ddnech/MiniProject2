@@ -17,7 +17,6 @@ const validate = (validations) => {
   };
 };
 
-// helper
 const checkUsername = async (value, { req }) => {
   try {
     const user = await db.User.findOne( {where:{username: value }} );
@@ -145,7 +144,15 @@ module.exports = {
       .optional()
       .isLength({ max: 50 })
       .withMessage("Maximun keywords length is 50 characters"),
-    body("category_id").notEmpty().withMessage("Category is required"),
+    body("category_id")
+    .notEmpty()
+    .withMessage('Category is required')
+    .custom((value) => {
+      if (value > 0 && value <= 7) {
+        return true; // Valid category
+      }
+      throw new Error('Invalid category');
+    }),
     body("linkUrl")
       .optional()
       .isURL()
@@ -182,6 +189,15 @@ module.exports = {
       .isMobilePhone()
       .withMessage("Invalid phone number")
       .custom(checkPhone),
+    ]),
+
+    validateChangeProfileImage: validate([
+      body("file").custom((value, { req }) => {
+        if (!req.file) {
+          throw new Error("Picture is required");
+        }
+        return true;
+      }),
     ]),
 
     validateChangePassword: validate([
@@ -235,21 +251,24 @@ module.exports = {
         .optional()
         .isLength({ max: 50 })
         .withMessage("Maximun keywords length is 50 characters"),
-      body("category_id").optional(),
+      body("category_id")
+      .optional()
+      .custom((value) => {
+        if (value > 0 && value <= 6) {
+          return true;
+        }
+        throw new Error('Invalid category');
+      }),
       body("linkUrl")
-        .optional()
-        .isURL()
-        .withMessage("Invalid link")
-        .isLength({ max: 255 })
-        .withMessage("Maximun link url length is 255 characters"),
+      .optional()
+      .isURL()
+      .withMessage("Invalid link")
+      .isLength({ max: 255 })
+      .withMessage("Maximun link url length is 255 characters"),
       body("country")
         .trim()
         .optional()
         .isLength({ max: 100 })
         .withMessage("Maximun country length is 100 characters"),
-      body("file")
-        .notEmpty()
-        .withMessage("Picture is required"),
-    ]),
-    
+      ]),
   };

@@ -114,7 +114,6 @@ const resetPassword = async (req,res) => {
 
 const registerUser = async (req, res) => {
   try {
-
     const { username, email, phone, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -131,16 +130,15 @@ const registerUser = async (req, res) => {
       verificationToken,
       resetPasswordToken: null,
       expiredResetPasswordToken: null,
-
     });
-    
+
     const verificationLink = `${process.env.link_email}${verificationToken}`;
 
     // Read the email template file
     const template = fs.readFileSync("./templates/register.html", "utf-8");
     // Compile the Handlebars template
     const templateCompile = hbs.compile(template);
-    const htmlResult = templateCompile({ username,verificationLink });
+    const htmlResult = templateCompile({ username, verificationLink });
 
     const mailOptions = {
       from: process.env.email_name,
@@ -152,20 +150,24 @@ const registerUser = async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).send('Internal server error');
       } else {
         console.log('Email sent:', info.response);
-        res.status(201).json(user);
+        res.status(201).send({
+          message: 'Please verify your email. An email has been sent.',
+          username: user.username,
+          email: user.email,
+          phone: user.phone,
+        });
       }
     });
-
   } catch (error) {
     if (error.name === 'SequelizeUniqueConstraintError') {
       console.log('Duplicate entry error:', error.errors[0].message);
-      res.status(409).json({ error: 'One or more account details already exist' });
+      res.status(409).send('One or more account details already exist');
     } else {
       console.error('Error creating user:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).send('Internal server error');
     }
   }
 };

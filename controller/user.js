@@ -242,6 +242,40 @@ const getUserLikedBlog = async (req, res) => {
   }
 };
 
+async function deleteUser(req, res) {
+  const userId = req.user.id;
+
+  try {
+    const user = await db.User.findByPk(userId, { include: db.Blog });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+
+    const imgProfile = user.getDataValue("imgProfile");
+
+    const blogs = user.Blogs;
+    for (const blog of blogs) {
+      const imgBlog = blog.getDataValue("imgBlog");
+      if (imgBlog) {
+        fs.unlinkSync(getAbsolutePathPublicFile(getFilenameFromDbValue(imgBlog)));
+      }
+    }
+
+    await user.destroy();
+
+    if (imgProfile) {
+      fs.unlinkSync(getAbsolutePathPublicFile(getFilenameFromDbValue(imgProfile)));
+    }
+
+    res.status(200).send({ message: "User account has been succesfully deleted" });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Errror", errors: error.message });
+  }
+}
+
+
   
 module.exports = {
   getProfile,
@@ -250,4 +284,5 @@ module.exports = {
   getUserLikedBlog,
   changePassword,
   getUserLikedBlog,
+  deleteUser,
 };
