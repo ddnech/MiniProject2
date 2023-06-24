@@ -373,7 +373,7 @@ const getAllCategory = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({
-      message: "Fatal error on server",
+      message: "Internal Server Error",
       errors: error.message,
     });
   }
@@ -445,7 +445,7 @@ const deleteUserBlog = async (req,res) => {
   
   } catch (error) {
     res.status(500).send({
-      message: "Fatal error on server",
+      message: "Internal Server Error",
       errors: error.message,
     });
   }

@@ -19,7 +19,7 @@ const getProfile = async (req, res) => {
     const userId = req.user.id;
 
     const user = await db.User.findByPk(userId, {
-      attributes: { exclude: ['password'] },
+      attributes: ['id', 'username','email','phone','imgProfile', 'isVerified', 'createdAt', 'updatedAt'],
     });
 
     if (!user) {

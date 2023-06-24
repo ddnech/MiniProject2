@@ -21,20 +21,20 @@ const sendResetPassword = async (req, res) => {
     const { email } = req.body;
     const resetPasswordToken = crypto.randomBytes(20).toString('hex');
 
-    // Calculate the expiration date (1 hour from now) using dayjs
+ 
     const expirationDate = dayjs().add(1, 'hour');
 
-    // Find the user based on the email
+
     const dbUser = await User.findOne({ where: { email } });
     if (!dbUser) {
       return res.status(404).json({ error: 'Email doesnt exist' });
     }
  
     dbUser.resetPasswordToken = resetPasswordToken;
-    dbUser.expiredResetPasswordToken = expirationDate.toDate(); // Convert to JavaScript Date object
+    dbUser.expiredResetPasswordToken = expirationDate.toDate();
     await dbUser.save();
 
-    const verificationLink = `${process.env.link_email}${resetPasswordToken}`;
+    const verificationLink = `${process.env.link_email_reset}${resetPasswordToken}`;
  
     const template = fs.readFileSync("./templates/reset.html", "utf-8");
 
