@@ -4,7 +4,7 @@ const PORT = 8000;
 app.use(express.json());
 
 
-const routes = require("./router");
+const routes = require("./routes");
 
 app.use("/Public", express.static("Public"));
 // app.use("/api",Routes);
