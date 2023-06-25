@@ -237,7 +237,7 @@ const loginUser = async (req, res) => {
         res.status(401).json({ error: 'Invalid credentials' });
       }
     } else {
-      res.status(401).json({ error: 'Invalid credentials or user not verified' });
+      res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
     console.error('Error during login:', error);

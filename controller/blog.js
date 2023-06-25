@@ -60,6 +60,14 @@ const updateBlog = async (req, res) => {
       updatedBlog.imgBlog = setFromFileNameToDBValue(req.file.filename);
     }
 
+    if (linkUrl !== undefined) {
+      updatedBlog.linkUrl = linkUrl !== "" ? linkUrl : updatedBlog.linkUrl;
+    }
+    
+    if (category_id !== undefined) {
+      updatedBlog.category_id = category_id !== "" ? category_id : updatedBlog.category_id;
+    }
+
     if (title) {
       updatedBlog.title = title;
     }
@@ -229,7 +237,7 @@ const searchBlogs = async (req, res) => {
     page: Number(req.query.page) || 1,
     perPage: Number(req.query.perPage) || 10,
     search: req.query.search || undefined,
-    sort: req.query.sort || undefined,
+    sort: req.query.sort || 'DESC', // Set default sorting order to DESC
   };
 
   try {
@@ -254,7 +262,7 @@ const searchBlogs = async (req, res) => {
       filterOptions.category_id = req.query.categoryId;
     }
 
-    const order = pagination.sort === 'oldest' ? 'ASC' : 'DESC';
+    const order = pagination.sort === 'ASC' ? 'ASC' : 'DESC';
 
     const results = await db.Blog.findAndCountAll({
       where: filterOptions,
@@ -290,14 +298,14 @@ const searchBlogs = async (req, res) => {
           title: blog.title,
           content: blog.content,
           imgBlog: blog.imgBlog,
-          country:blog.country,
-          linkUrl:blog.linkUrl,
-          keywords:blog.keywords,
+          country: blog.country,
+          linkUrl: blog.linkUrl,
+          keywords: blog.keywords,
           author: {
             id: blog.User.id,
             username: blog.User.username,
           },
-          Category:blog.Category.name
+          Category: blog.Category.name,
         };
       }),
     });

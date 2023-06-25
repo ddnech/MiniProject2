@@ -1,5 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../../models");
+const validator = require('validator');
+const { isURL } = require('validator');
 
 const validate = (validations) => {
   return async (req, res, next) => {
@@ -149,16 +151,18 @@ module.exports = {
     .withMessage('Category is required')
     .custom((value) => {
       if (value > 0 && value <= 6) {
-        return true; // Valid category
+        return true;
       }
       throw new Error('Invalid category');
     }),
     body("linkUrl")
-      .optional()
-      .isURL()
-      .withMessage("Invalid link")
-      .isLength({ max: 255 })
-      .withMessage("Maximun link url length is 255 characters"),
+    .optional()
+    .custom((value, { req }) => {
+      if (value === "" || (value && validator.isURL(value) && value.length <= 255)) {
+        return true;
+      }
+      throw new Error("Invalid link");
+    }),
     body("country")
       .trim()
       .optional()
@@ -254,17 +258,19 @@ module.exports = {
       body("category_id")
       .optional()
       .custom((value) => {
-        if (value > 0 && value <= 6) {
+        if (value === "" || value > 0 && value <= 6) {
           return true;
         }
         throw new Error('Invalid category');
       }),
       body("linkUrl")
       .optional()
-      .isURL()
-      .withMessage("Invalid link")
-      .isLength({ max: 255 })
-      .withMessage("Maximun link url length is 255 characters"),
+      .custom((value, { req }) => {
+        if (value === "" || (value && validator.isURL(value) && value.length <= 255)) {
+          return true;
+        }
+        throw new Error("Invalid link");
+      }),
       body("country")
         .trim()
         .optional()
