@@ -148,7 +148,7 @@ module.exports = {
     .notEmpty()
     .withMessage('Category is required')
     .custom((value) => {
-      if (value > 0 && value <= 7) {
+      if (value > 0 && value <= 6) {
         return true; // Valid category
       }
       throw new Error('Invalid category');
