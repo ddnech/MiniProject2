@@ -63,7 +63,7 @@ const updateBlog = async (req, res) => {
     if (linkUrl !== undefined) {
       updatedBlog.linkUrl = linkUrl !== "" ? linkUrl : updatedBlog.linkUrl;
     }
-    
+
     if (category_id !== undefined) {
       updatedBlog.category_id = category_id !== "" ? category_id : updatedBlog.category_id;
     }
@@ -146,37 +146,27 @@ const likeBlog = async (req, res) => {
 
 const unlikeBlog = async (req, res) => {
   try {
+    // Check if the user has liked the blog
     const checkLiked = await db.Liked_blog.findOne({
       where: {
-        blog_id:parseInt(req.params.id),
-        user_id:req.user.id,
-      }
-    });
-    
-    const exist = await db.Liked_blog.findOne({
-      where: {
-        blog_id:parseInt(req.params.id),
-      }
+        blog_id: parseInt(req.params.id),
+        user_id: req.user.id,
+      },
     });
 
-    if(!exist){
-      return res.status(400).send({
-        message: "Blog was not found",
-      });
-    }
     if (!checkLiked) {
-      return res.status(400).send({
-        message: "User has not liked the blog",
+      return res.status(404).send({
+        message: "Blog not found",
       });
     }
 
 
     await db.Liked_blog.destroy({
       where:{
-        blog_id:parseInt(req.params.id),
-        user_id:req.user.id,
+        blog_id: parseInt(req.params.id),
+        user_id: req.user.id,
       }
-    })
+    });
 
     return res.status(200).send({
       message: "Blog unliked successfully",

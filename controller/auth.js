@@ -44,7 +44,7 @@ const sendResetPassword = async (req, res) => {
     const mailOptions = {
       from: process.env.email_name,
       to: email,
-      subject: 'Account Verification',
+      subject: 'Reset Password',
       html: htmlResult,
     };
 

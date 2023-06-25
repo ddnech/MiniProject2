@@ -110,7 +110,7 @@ module.exports = {
     ]),
   
     validateResetPassword: validate([
-      body("password")
+      body("newPassword")
         .notEmpty()
         .withMessage("New password is required")
         .isStrongPassword({
@@ -121,8 +121,8 @@ module.exports = {
       })
         .withMessage("Password must be 6 letters long and contain at least 1 uppercase letter, 1 number, and 1 symbol")
         .custom((value, { req }) => {
-          if (value !== req.body.confirmPassword) {
-            throw new Error("Confirm password does not match with password");
+          if (value !== req.body.confirmNewPassword) {
+            throw new Error("confirmNewPassword does not match with newPassword");
           }
           return true;
         }),
@@ -228,7 +228,7 @@ module.exports = {
         )
         .custom((value, { req }) => {
           if (value !== req.body.confirmNewPassword) {
-            throw new Error("Confirm password does not match with password");
+            throw new Error("confirmNewPassword does not match with newPassword");
           }
           return true;
         }),
