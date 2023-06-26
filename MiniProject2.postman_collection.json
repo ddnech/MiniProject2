@@ -24,7 +24,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/blog?page=&perPage=10&search=&sort=ASC",
+							"raw": "http://localhost:8000/api/blog?page=1&perPage=1&search=kedua&categoryId=&sort=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -37,28 +37,28 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "",
+									"value": "1",
 									"description": "current page of blogs"
 								},
 								{
 									"key": "perPage",
-									"value": "10",
+									"value": "1",
 									"description": "maximum blogs per page"
 								},
 								{
 									"key": "search",
-									"value": "",
-									"description": "search query title"
+									"value": "kedua",
+									"description": "search query title atau keywords"
 								},
 								{
 									"key": "categoryId",
-									"value": "2",
-									"description": "search by category id",
-									"disabled": true
+									"value": "",
+									"description": "search by category id"
 								},
 								{
 									"key": "sort",
-									"value": "ASC"
+									"value": "",
+									"description": "default sort by DESC (newest)"
 								}
 							]
 						}
@@ -137,7 +137,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						}
@@ -154,38 +154,38 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "This is my First Blog",
+									"value": "This is my blog",
 									"type": "default"
 								},
 								{
 									"key": "content",
-									"value": "this is my first content",
+									"value": "Hi",
 									"type": "default"
 								},
 								{
 									"key": "keywords",
-									"value": "nothing",
+									"value": "Something",
 									"type": "default"
 								},
 								{
 									"key": "category_id",
-									"value": "1",
+									"value": "5",
 									"type": "text"
 								},
 								{
 									"key": "country",
-									"value": "meowland",
+									"value": "Indonesia",
 									"type": "default"
 								},
 								{
 									"key": "linkUrl",
-									"value": "www.google.com",
+									"value": "www.youtube.com",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/david/Desktop/Kendo/DSCF0408.JPG"
+									"src": "/C:/Users/david/Desktop/Kendo/DSCF0359.JPG"
 								}
 							]
 						},
@@ -207,16 +207,6 @@
 				{
 					"name": "Update Blog",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjA4ODQ5fQ.ITN5AQVD2USrl23dus8g0UGHT-1VwmhO1IKnZhodnAs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -224,12 +214,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "This is my First Blog",
+									"value": "",
 									"type": "default"
 								},
 								{
 									"key": "content",
-									"value": "this is my first content",
+									"value": "",
 									"type": "default"
 								},
 								{
@@ -239,7 +229,7 @@
 								},
 								{
 									"key": "category_id",
-									"value": "2",
+									"value": "",
 									"type": "text"
 								},
 								{
@@ -249,13 +239,13 @@
 								},
 								{
 									"key": "linkUrl",
-									"value": "www.google.com",
+									"value": "",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/david/Desktop/Kendo/DSCF0408.JPG"
+									"src": "/C:/Users/david/Desktop/Kendo/DSCF0348.JPG"
 								}
 							]
 						},
@@ -274,7 +264,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "18"
+									"value": "1"
 								}
 							]
 						}
@@ -284,16 +274,6 @@
 				{
 					"name": "Like Blog",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjA4ODQ5fQ.ITN5AQVD2USrl23dus8g0UGHT-1VwmhO1IKnZhodnAs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"url": {
@@ -312,7 +292,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "17"
+									"value": ""
 								}
 							]
 						}
@@ -322,16 +302,6 @@
 				{
 					"name": "Unlike Blog",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjA4ODQ5fQ.ITN5AQVD2USrl23dus8g0UGHT-1VwmhO1IKnZhodnAs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"url": {
@@ -350,7 +320,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "17"
+									"value": ""
 								}
 							]
 						}
@@ -360,20 +330,10 @@
 				{
 					"name": "Delete Blog",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjA4ODQ5fQ.ITN5AQVD2USrl23dus8g0UGHT-1VwmhO1IKnZhodnAs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/blog/delete/:id",
+							"raw": "http://localhost:8000/api/blog/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -382,13 +342,12 @@
 							"path": [
 								"api",
 								"blog",
-								"delete",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "17"
+									"value": "1"
 								}
 							]
 						}
@@ -396,16 +355,6 @@
 					"response": []
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjIxNDM2fQ.Z8soly_Xf8pjaxqtHdOqudJqFhvF8jHVih7w0QDAkTM",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -437,7 +386,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"david+1\",\r\n  \"email\": \"ddnech+1@gmail.com\",\r\n  \"phone\": \"12345674911\",\r\n  \"password\": \"Password@12!\",\r\n  \"confirmPassword\": \"Password@12!\"\r\n}\r\n",
+							"raw": "{\r\n  \"username\": \"david+20\",\r\n  \"email\": \"ddnech+20@gmail.com\",\r\n  \"phone\": \"12345235118\",\r\n  \"password\": \"Password@12!\",\r\n  \"confirmPassword\": \"Password@12!\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -467,7 +416,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identifier\":\"david+1\",\r\n    \"password\":\"Password@12!\"\r\n}",
+							"raw": "{\r\n    \"identifier\":\"david+20\",\r\n    \"password\":\"Password@12!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -496,7 +445,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/auth/verify?token=f7b54347efac7cd7c85f0a8c936885a49602bdef",
+							"raw": "http://localhost:8000/api/auth/verify?token=5a35492d395e662447d7adfb48ae3e54f0beb9d9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -510,7 +459,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "f7b54347efac7cd7c85f0a8c936885a49602bdef"
+									"value": "5a35492d395e662447d7adfb48ae3e54f0beb9d9"
 								}
 							]
 						}
@@ -554,7 +503,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newPassword\":\"Password@21!\",\r\n    \"confirmNewPassword\":\"Password@21!\"\r\n}",
+							"raw": "{\r\n    \"newPassword\":\"Password@12!\",\r\n    \"confirmNewPassword\":\"Password@12!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -562,7 +511,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/auth/reset-pass?token=556e79bd794217557e3a672f451090f3e1a4c6b7",
+							"raw": "http://localhost:8000/api/auth/reset-pass?token=4cbb9759e354b30c929b9958ad09320fb9d9582a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -576,7 +525,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "556e79bd794217557e3a672f451090f3e1a4c6b7"
+									"value": "4cbb9759e354b30c929b9958ad09320fb9d9582a"
 								}
 							]
 						}
@@ -615,7 +564,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/blog/user",
+							"raw": "http://localhost:8000/api/blog/user?page=1&perPage=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -625,6 +574,16 @@
 								"api",
 								"blog",
 								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "perPage",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -668,7 +627,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"david+2\",\r\n    \"phone\":\"\"\r\n}",
+							"raw": "{\r\n    \"email\":\"ddnech+10@gmail.com\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -727,6 +686,15 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"Password@12!\",\r\n    \"newPassword\":\"Password@13!\",\r\n    \"confirmNewPassword\":\"Password@13!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8000/api/user/change-pass",
 							"protocol": "http",
@@ -771,7 +739,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJkYXZpZCsxIiwiaWF0IjoxNjg3NjI0MjIyfQ.J6VQNsgZeb_mTB_Hqx9Gmp4f7DQhqfQEaOjM6fvznkc",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJkYXZpZCsyMCIsImlhdCI6MTY4Nzc4ODYxOX0.-s_b5IaesofAAcqWUedMsF0vCB8m15QD80QRgAJA3Y8",
 				"type": "string"
 			}
 		]
