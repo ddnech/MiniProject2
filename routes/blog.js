@@ -14,7 +14,7 @@ router.get("/top-blogs",blogController.searchTopBlogs) //Search top 8 blogs
 router.get("/all-category",blogController.getAllCategory) // get all category
 router.get("/:id",blogController.getBlogById); //Search  1 Blog by id
 router.patch("/:blog", multerUpload.single("file"),authMiddleware,authVerify,authValidator.validateUpdateBlog,blogController.updateBlog); //Update Blog
-router.delete("/delete/:id",authMiddleware,authVerify,blogController.deleteUserBlog); // Delete user
+router.delete("/:id",authMiddleware,authVerify,blogController.deleteUserBlog); // Delete user Blog
 
 module.exports = router;
 
